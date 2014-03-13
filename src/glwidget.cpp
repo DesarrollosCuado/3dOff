@@ -100,8 +100,8 @@ void GLWidget::setZTranslation(int angle)
 void GLWidget::initializeGL()
 {
         glEnable(GL_DEPTH_TEST);
-        vs = new GLVertexShader(":/GLSL/phong.vsh");
-        fs = new GLFragmentShader(":/GLSL/phong.fsh");
+        vs = new GLVertexShader(":/GLSL/shaders/phong.vsh");
+        fs = new GLFragmentShader(":/GLSL/shaders/phong.fsh");
         glsl=new GLProgram;
         glsl->attach(*vs);
         if(glsl->failed()){
