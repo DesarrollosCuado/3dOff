@@ -19,10 +19,10 @@ public:
 protected:
     virtual void changeEvent(QEvent *e);
 
-private:
+    private:
     Ui::ManagerLight *m_ui;
 
-private slots:
+    private slots:
     void on_matEsp_clicked();
     void on_matDiff_clicked();
     void on_shininess_valueChanged(int );

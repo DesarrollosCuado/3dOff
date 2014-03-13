@@ -42,13 +42,10 @@
 #ifndef GLSHADERS_H
 #define GLSHADERS_H
 
-//#include <GL/glew.h>
 #include "glextensions.h"
 
 #include <QtGui>
 #include <QtOpenGL>
-
-#include "vector.h"
 
 class GLShader
 {

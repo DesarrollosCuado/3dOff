@@ -5,13 +5,13 @@ DM3d::DM3d(QWidget *parent)
     : QMainWindow(parent)
 {
 	ui.setupUi(this);
-        ml=new ManagerLight(this);
-        ml->setWindowFlags(Qt::Tool);
-        //ml->setWindowOpacity(0.75);
-        ml->gl=ui.widget;
-        showMaximized();
-        ml->setGeometry(width()-410,height()-260,ml->width(),ml->height());
-        ml->show();
+    ml=new ManagerLight(this);
+    ml->setWindowFlags(Qt::Tool);
+    //ml->setWindowOpacity(0.75);
+    ml->gl=ui.widget;
+    showMaximized();
+    ml->setGeometry(width()-410,height()-260,ml->width(),ml->height());
+    ml->show();
 }
 
 DM3d::~DM3d()
