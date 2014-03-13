@@ -54,19 +54,7 @@
      <addaction name="actionBoundingBox"/>
      <addaction name="actionNormales"/>
     </widget>
-    <widget class="QMenu" name="menuColor">
-     <property name="title">
-      <string>Color</string>
-     </property>
-     <addaction name="actionRelleno_2"/>
-     <addaction name="actionMallado_2"/>
-     <addaction name="actionVertices_2"/>
-     <addaction name="actionFog"/>
-     <addaction name="actionBounding_Box"/>
-     <addaction name="actionNormales_2"/>
-    </widget>
     <addaction name="menuModos"/>
-    <addaction name="menuColor"/>
     <addaction name="separator"/>
     <addaction name="actionActivar_Fog"/>
     <addaction name="actionZ_Buffer"/>
@@ -79,8 +67,6 @@
     <addaction name="separator"/>
     <addaction name="actionOrtogonal"/>
     <addaction name="actionPerspectiva"/>
-    <addaction name="separator"/>
-    <addaction name="actionFlikering"/>
     <addaction name="separator"/>
     <addaction name="actionNormal_counter_clockwise"/>
     <addaction name="actionNormal_clockwise"/>
