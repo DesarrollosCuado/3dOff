@@ -6,13 +6,14 @@
 #include <QtOpenGL>
 #include "vector.h"
 #include "glshaders.h"
-#include "punto3d.h"
+#include "lightConfig.h"
 #include <algorithm>
-#include <GL/glext.h>
+#ifdef __unix__
+    #include <GL/glext.h>
+#endif
 #include <GL/glu.h>
 #include "Math/Vector3Df.h"
 #include "Math/Matrix4x4f.h"
-#include "lightConfig.h"
 
 using namespace std;
 
@@ -25,11 +26,11 @@ public:
         ~GLWidget();
 
     GLuint primitiveList;
-    QVector<punto3d> vertex;
-    QVector<punto3d> normals;
-    QVector<punto3d> normalsCCW;
-    QVector<punto3d> normals2;
-    QVector<punto3d> normals2CCW;
+    QVector<CVector3Df> vertex;
+    QVector<CVector3Df> normals;
+    QVector<CVector3Df> normalsCCW;
+    QVector<CVector3Df> normals2;
+    QVector<CVector3Df> normals2CCW;
 	QVector< QVector<int> > triangles; 
     CMatrix4x4f m_rotMatrix;
     CMatrix4x4f m_rotInvMatrix;
@@ -64,9 +65,9 @@ public:
 	QColor cfog;
 	QColor cbounding;
 	QColor cnormales;
-	punto3d centro;
-	punto3d ma;
-	punto3d me;
+    CVector3Df centro;
+    CVector3Df ma;
+    CVector3Df me;
 
     lightConfig luz[5];
     lightConfig material[2];
@@ -94,8 +95,8 @@ protected:
 //	void keyPressEvent (QKeyEvent * event );
 
 private:
-	void normalizeAngle(int *angle);
-	double normalizeInt(int angle);
+    void normalizeAngle(int *angle);
+    double normalizeInt(int angle);
 	QPoint lastPos;
 };
 

@@ -128,8 +128,8 @@
   </widget>
   <action name="actionAbrir_OFF">
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/open.png</normaloff>iconos/open.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/open.png</normaloff>:/Imagenes/Iconos/iconos/open.png</iconset>
    </property>
    <property name="text">
     <string>Abrir OFF</string>
@@ -143,8 +143,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/linepointer.png</normaloff>iconos/linepointer.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/linepointer.png</normaloff>:/Imagenes/Iconos/iconos/linepointer.png</iconset>
    </property>
    <property name="text">
     <string>Mallado</string>
@@ -155,8 +155,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/puntos.png</normaloff>iconos/puntos.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/puntos.png</normaloff>:/Imagenes/Iconos/iconos/puntos.png</iconset>
    </property>
    <property name="text">
     <string>Vertices</string>
@@ -167,8 +167,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/relleno.png</normaloff>iconos/relleno.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/relleno.png</normaloff>:/Imagenes/Iconos/iconos/relleno.png</iconset>
    </property>
    <property name="text">
     <string>Relleno</string>
@@ -194,8 +194,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/fog.png</normaloff>iconos/fog.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/fog.png</normaloff>:/Imagenes/Iconos/iconos/fog.png</iconset>
    </property>
    <property name="text">
     <string>Fog</string>
@@ -211,8 +211,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/zbuffer.png</normaloff>iconos/zbuffer.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/zbuffer.png</normaloff>:/Imagenes/Iconos/iconos/zbuffer.png</iconset>
    </property>
    <property name="text">
     <string>Z-Buffer</string>
@@ -226,8 +226,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/rotar.png</normaloff>iconos/rotar.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/rotar.png</normaloff>:/Imagenes/Iconos/iconos/rotar.png</iconset>
    </property>
    <property name="text">
     <string>Rotar</string>
@@ -238,8 +238,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/trans.png</normaloff>iconos/trans.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/trans.png</normaloff>:/Imagenes/Iconos/iconos/trans.png</iconset>
    </property>
    <property name="text">
     <string>Transladar</string>
@@ -250,8 +250,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/bounding.png</normaloff>iconos/bounding.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/bounding.png</normaloff>:/Imagenes/Iconos/iconos/bounding.png</iconset>
    </property>
    <property name="text">
     <string>Bounding Box</string>
@@ -267,8 +267,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/clipping.png</normaloff>iconos/clipping.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/clipping.png</normaloff>:/Imagenes/Iconos/iconos/clipping.png</iconset>
    </property>
    <property name="text">
     <string>Plano de Corte</string>
@@ -279,8 +279,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/modifClipping.png</normaloff>iconos/modifClipping.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/modifClipping.png</normaloff>:/Imagenes/Iconos/iconos/modifClipping.png</iconset>
    </property>
    <property name="text">
     <string>Rotar/Trasladar Plano de Corte</string>
@@ -291,8 +291,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/normal.png</normaloff>iconos/normal.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/normal.png</normaloff>:/Imagenes/Iconos/iconos/normal.png</iconset>
    </property>
    <property name="text">
     <string>Normales</string>
@@ -311,8 +311,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>iconos/back.png</normaloff>iconos/back.png</iconset>
+    <iconset resource="files.qrc">
+     <normaloff>:/Imagenes/Iconos/iconos/back.png</normaloff>:/Imagenes/Iconos/iconos/back.png</iconset>
    </property>
    <property name="text">
     <string>Backface Culling</string>
@@ -455,6 +455,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="files.qrc"/>
+ </resources>
  <connections/>
 </ui>

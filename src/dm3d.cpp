@@ -35,134 +35,135 @@ void DM3d::on_actionAbrir_OFF_triggered()
 		QString line = file.readLine();
 		line=file.readLine();
 		QStringList l=line.split(" ");
-		ui.widget->vertex=QVector<punto3d>(l.at(0).toInt());
+        ui.widget->vertex=QVector<CVector3Df>(l.at(0).toInt());
 		int tri=l.at(1).toInt();
-		punto3d b1(-10e30f,-10e30f,-10e30f);
-		punto3d b2(10e30f,10e30f,10e30f);
-                double maximo,maX=double(-0x3f3f3f3f),miX=double(0x3f3f3f3f);
-                double maY=maX,miY=miX,maZ=maX,miZ=miX;
+        CVector3Df b1(-10e30f,-10e30f,-10e30f);
+        CVector3Df b2(10e30f,10e30f,10e30f);
+        float maximo,maX=float(-0x3f3f3f3f),miX=float(0x3f3f3f3f);
+        float maY=maX,miY=miX,maZ=maX,miZ=miX;
 		int tVert=ui.widget->vertex.size();
 		for(int i=0;i<tVert;++i){
 			line=file.readLine();
 			l=line.split(" ");
-			double a=l.at(0).toDouble();
-			double b=l.at(1).toDouble();
-                        double c=l.at(2).toDouble();
-                        maX=max(a,maX);
-                        maY=max(b,maY);
-                        maZ=max(c,maZ);
-                        miX=min(a,miX);
-                        miY=min(b,miY);
-                        miZ=min(c,miZ);
-			ui.widget->vertex[i]=punto3d(a,b,c);
-                        b1.x=max(b1.x,a);
-                        b1.y=max(b1.y,b);
-                        b1.z=max(b1.z,c);
-                        b2.x=min(b2.x,a);
-                        b2.y=min(b2.y,b);
-                        b2.z=min(b2.z,c);
+            float a=l.at(0).toDouble();
+            float b=l.at(1).toDouble();
+            float c=l.at(2).toDouble();
+            maX=max(a,maX);
+            maY=max(b,maY);
+            maZ=max(c,maZ);
+            miX=min(a,miX);
+            miY=min(b,miY);
+            miZ=min(c,miZ);
+            ui.widget->vertex[i]=CVector3Df(a,b,c);
+            b1.v[0]=max(b1.v[0],a);
+            b1.v[1]=max(b1.v[1],b);
+            b1.v[2]=max(b1.v[2],c);
+            b2.v[0]=min(b2.v[0],a);
+            b2.v[1]=min(b2.v[1],b);
+            b2.v[2]=min(b2.v[2],c);
 		}
-                maximo=max(maX-miX,max(maY-miY,maZ-miZ));
-                b1/=maximo;
-                b2/=maximo;
-                ui.widget->centro=punto3d((b1.x+b2.x)/2.0f,(b1.y+b2.y)/2.0f,(b1.z+b2.z)/2.0f);
-                b1-=ui.widget->centro;
-                b2-=ui.widget->centro;
-                for(int i=0;i<tVert;++i){
-                        ui.widget->vertex[i]/=maximo;
-                        ui.widget->vertex[i]-=ui.widget->centro;
+
+        maximo=max(maX-miX,max(maY-miY,maZ-miZ));
+        b1/=maximo;
+        b2/=maximo;
+        ui.widget->centro=CVector3Df((b1.v[0]+b2.v[0])/2.0f,(b1.v[1]+b2.v[1])/2.0f,(b1.v[2]+b2.v[2])/2.0f);
+        b1-=ui.widget->centro;
+        b2-=ui.widget->centro;
+
+        for(int i=0;i<tVert;++i){
+            ui.widget->vertex[i]/=maximo;
+            ui.widget->vertex[i]-=ui.widget->centro;
+        }
+
+        ui.widget->centro=CVector3Df();
+        ui.widget->ma=b1;
+        ui.widget->me=b2;
+
+        ui.widget->triangles.clear();
+        for(int i=0;i<tri;++i){
+            line=file.readLine();
+            l=line.split(" ");
+            QVector<int> t(0);
+            for(int j=1;j<l.size();++j){
+                QString temp=l.at(j);
+                if(temp!="\n" && temp!="\t" && temp!="\t\n" && temp!="\0")
+                    t.push_back(temp.toInt());
+            }
+            if(t.size()==3) {
+                ui.widget->triangles.push_back(t);
+            }else{
+                for (int j = 0; j < t.size()-2; ++j) {
+                    QVector<int> arr3;
+                    arr3.push_back(t[0]);
+                    arr3.push_back(t[j+1]);
+                    arr3.push_back(t[j+2]);
+                    ui.widget->triangles.push_back(arr3);
                 }
-                ui.widget->centro=punto3d();
+            }
+        }
+        ui.widget->normals.clear();
+        ui.widget->normals2.clear();
+        ui.widget->normals=QVector<CVector3Df>(ui.widget->triangles.size());
+        ui.widget->normals2=QVector<CVector3Df>(ui.widget->vertex.size(),CVector3Df(0.0,0.0,0.0));
+        ui.widget->normalsCCW=QVector<CVector3Df>(ui.widget->triangles.size());
+        ui.widget->normals2CCW=QVector<CVector3Df>(ui.widget->vertex.size(),CVector3Df(0.0,0.0,0.0));
+        int tamV=ui.widget->vertex.size();
+        int tamT=ui.widget->triangles.size();
+        QVector<int> cont(ui.widget->vertex.size(),0);
+        for(int i=0;i<tamT;++i){
+            ui.widget->normals[i]=(ui.widget->vertex[ui.widget->triangles[i][1]]-ui.widget->vertex[ui.widget->triangles[i][0]])*(ui.widget->vertex[ui.widget->triangles[i][2]]-ui.widget->vertex[ui.widget->triangles[i][0]]);
+            ui.widget->normals[i].Normalize();
 
+            ui.widget->normalsCCW[i]=(ui.widget->vertex[ui.widget->triangles[i][2]]-ui.widget->vertex[ui.widget->triangles[i][0]])*(ui.widget->vertex[ui.widget->triangles[i][1]]-ui.widget->vertex[ui.widget->triangles[i][0]]);
+            ui.widget->normalsCCW[i].Normalize();
 
-                ui.widget->ma=b1;
-                ui.widget->me=b2;
+            ui.widget->normals2[ui.widget->triangles[i][0]]+=ui.widget->normals[i];
+            ui.widget->normals2[ui.widget->triangles[i][1]]+=ui.widget->normals[i];
+            ui.widget->normals2[ui.widget->triangles[i][2]]+=ui.widget->normals[i];
 
-		ui.widget->triangles.clear();
-		for(int i=0;i<tri;++i){
-			line=file.readLine();
-			l=line.split(" ");
-			QVector<int> t(0);
-			for(int j=1;j<l.size();++j){
-				QString temp=l.at(j);
-				if(temp!="\n" && temp!="\t" && temp!="\t\n" && temp!="\0") t.push_back(temp.toInt());
-			}
-			if(t.size()==3) 
-				ui.widget->triangles.push_back(t);
-			else{
-				for (int j = 0; j < t.size()-2; ++j)
-				{
-                                    QVector<int> arr3;
-                                    arr3.push_back(t[0]);
-                                    arr3.push_back(t[j+1]);
-                                    arr3.push_back(t[j+2]);
-                                    ui.widget->triangles.push_back(arr3);
-				}	
-			}
-                }
-                ui.widget->normals.clear();
-                ui.widget->normals2.clear();
-                ui.widget->normals=QVector<punto3d>(ui.widget->triangles.size());
-                ui.widget->normals2=QVector<punto3d>(ui.widget->vertex.size(),punto3d(0.0,0.0,0.0));
-                ui.widget->normalsCCW=QVector<punto3d>(ui.widget->triangles.size());
-                ui.widget->normals2CCW=QVector<punto3d>(ui.widget->vertex.size(),punto3d(0.0,0.0,0.0));
-                int tamV=ui.widget->vertex.size();
-                int tamT=ui.widget->triangles.size();
-                QVector<int> cont(ui.widget->vertex.size(),0);
-                for(int i=0;i<tamT;++i){
-                        ui.widget->normals[i]=punto3d::proX(ui.widget->vertex[ui.widget->triangles[i][1]]-ui.widget->vertex[ui.widget->triangles[i][0]],ui.widget->vertex[ui.widget->triangles[i][2]]-ui.widget->vertex[ui.widget->triangles[i][0]]);
-                        ui.widget->normals[i].normalize();
+            ui.widget->normals2CCW[ui.widget->triangles[i][0]]+=ui.widget->normalsCCW[i];
+            ui.widget->normals2CCW[ui.widget->triangles[i][1]]+=ui.widget->normalsCCW[i];
+            ui.widget->normals2CCW[ui.widget->triangles[i][2]]+=ui.widget->normalsCCW[i];
+            ++cont[ui.widget->triangles[i][0]];
+            ++cont[ui.widget->triangles[i][1]];
+            ++cont[ui.widget->triangles[i][2]];
+        }
+        for(int i=0;i<tamV;++i){
+            ui.widget->normals2[i]/=float(cont[i]);
+            ui.widget->normals2[i].Normalize();
+            ui.widget->normals2CCW[i]/=float(cont[i]);
+            ui.widget->normals2CCW[i].Normalize();
+        }
+        /*
+        float sumx = 0.0f;
+        float sumy = 0.0f;
+        float sumz = 0.0f;
+        int shared=0;
+        int i, j;
+        for (i=0; i<tamV; ++i)
+        {
+        for (j=0; j<tamT; ++j)
+        {
+        if (ui.widget->triangles[j][0]==i || ui.widget->triangles[j][1]==i || ui.widget->triangles[j][2]==i)
+        {
+        sumx += ui.widget->normals[j].x;
+        sumy += ui.widget->normals[j].y;
+        sumz += ui.widget->normals[j].z;
+        shared ++;
+        }
+        }
 
-                        ui.widget->normalsCCW[i]=punto3d::proX(ui.widget->vertex[ui.widget->triangles[i][2]]-ui.widget->vertex[ui.widget->triangles[i][0]],ui.widget->vertex[ui.widget->triangles[i][1]]-ui.widget->vertex[ui.widget->triangles[i][0]]);
-                        ui.widget->normalsCCW[i].normalize();
-
-                        ui.widget->normals2[ui.widget->triangles[i][0]]+=ui.widget->normals[i];
-                        ui.widget->normals2[ui.widget->triangles[i][1]]+=ui.widget->normals[i];
-                        ui.widget->normals2[ui.widget->triangles[i][2]]+=ui.widget->normals[i];
-
-                        ui.widget->normals2CCW[ui.widget->triangles[i][0]]+=ui.widget->normalsCCW[i];
-                        ui.widget->normals2CCW[ui.widget->triangles[i][1]]+=ui.widget->normalsCCW[i];
-                        ui.widget->normals2CCW[ui.widget->triangles[i][2]]+=ui.widget->normalsCCW[i];
-                        ++cont[ui.widget->triangles[i][0]];
-                        ++cont[ui.widget->triangles[i][1]];
-                        ++cont[ui.widget->triangles[i][2]];
-                }
-                for(int i=0;i<tamV;++i){
-                    ui.widget->normals2[i]/=float(cont[i]);
-                    ui.widget->normals2[i].normalize();
-                    ui.widget->normals2CCW[i]/=float(cont[i]);
-                    ui.widget->normals2CCW[i].normalize();
-                }
-                /*
-                float sumx = 0.0f;
-                float sumy = 0.0f;
-                float sumz = 0.0f;
-                int shared=0;
-                int i, j;
-                for (i=0; i<tamV; ++i)
-                {
-                        for (j=0; j<tamT; ++j)
-                        {
-                                if (ui.widget->triangles[j][0]==i || ui.widget->triangles[j][1]==i || ui.widget->triangles[j][2]==i)
-                                {
-                                        sumx += ui.widget->normals[j].x;
-                                        sumy += ui.widget->normals[j].y;
-                                        sumz += ui.widget->normals[j].z;
-                                        shared ++;
-                                }
-                        }
-
-                        punto3d n2(sumx,sumy,sumz);
-                        n2=n2/float(shared);
-                        n2.normalize();
-                        ui.widget->normals2.push_back(n2);
-                        sumx=0.0;
-                        sumy=0.0;
-                        sumz=0.0;
-                        shared=0;
-                }*/
-                ui.widget->changeList();
-		ui.widget->updateGL();
+        punto3d n2(sumx,sumy,sumz);
+        n2=n2/float(shared);
+        n2.normalize();
+        ui.widget->normals2.push_back(n2);
+        sumx=0.0;
+        sumy=0.0;
+        sumz=0.0;
+        shared=0;
+        }*/
+        ui.widget->changeList();
+        ui.widget->updateGL();
 	}else{
 		QMessageBox::information(this,"Error...","No se puede abrir el archivo");
 	}

@@ -1,6 +1,6 @@
 
 #include "glextensions.h"
-#include <GL/glext.h>
+//#include <GL/glext.h>
 #include "dm3d.h"
 #include <QtGui>
 #include <QGLWidget>
@@ -42,22 +42,22 @@ bool necessaryExtensionsSupported()
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    if ((QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_5) == 0) {
+    /*if ((QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_1_5) == 0) {
         QMessageBox::critical(0, "OpenGL features missing","OpenGL version 1.5 or higher is required to run this project.\nThe program will now exit.");
         return -1;
-    }
+    }*/
    QGLWidget *widget = new QGLWidget(QGLFormat(QGL::SampleBuffers));
-    widget->makeCurrent();
-    if (!necessaryExtensionsSupported()) {
+   widget->makeCurrent();
+   /* if (!necessaryExtensionsSupported()) {
         QMessageBox::critical(0, "OpenGL features missing", "The OpenGL extensions required to run this project are missing.\nThe program will now exit.");
         delete widget;
         return -2;
-    }
-    if (!getGLExtensionFunctions().resolve(widget->context())) {
+    }*/
+    /*if (!getGLExtensionFunctions().resolve(widget->context())) {
         QMessageBox::critical(0, "OpenGL features missing", "Failed to resolve OpenGL functions required to run this project.\nThe program will now exit.");
         delete widget;
         return -3;
-    }
+    }*/
     delete widget;
    // qCritical((const char*)glGetString(GL_EXTENSIONS));
     DM3d w;

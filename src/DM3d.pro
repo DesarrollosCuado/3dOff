@@ -8,11 +8,9 @@ INCLUDEPATH += .
 # Input
 HEADERS += dm3d.h \
     glwidget.h \
-    punto3d.h \
     managerlight.h \
     glshaders.h \
     glextensions.h \
-    vector.h \
     lightConfig.h \
     Math/Interval.h \
     Math/IntPoint3D.h \
@@ -24,7 +22,6 @@ FORMS += dm3d.ui \
 SOURCES += dm3d.cpp \
     glwidget.cpp \
     main.cpp \
-    punto3d.cpp \
     managerlight.cpp \
     glshaders.cpp \
     glextensions.cpp \
@@ -34,6 +31,9 @@ SOURCES += dm3d.cpp \
     Math/Vector3Df.cpp \
     Math/Vector4Df.cpp
 QT += opengl
-OTHER_FILES += ..\phong.frag ..\phong.vert
+OTHER_FILES += shaders/phong.fsh shaders/phong.vsh
 
-LIBS += -lGLU
+unix:LIBS += -lGLU
+
+RESOURCES += \
+    files.qrc

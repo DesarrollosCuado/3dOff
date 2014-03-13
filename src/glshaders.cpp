@@ -68,10 +68,6 @@ GLShader::GLShader(const char *data, int size, GLenum shaderType)
 GLShader::GLShader(const QString& fileName, GLenum shaderType)
     : m_compileError(false), m_failed(false)
 {
-    GLSHADERS_ASSERT_OPENGL("GLShader::GLShader",
-        glCreateShaderObjectARB && glShaderSourceARB && glCompileShaderARB && glGetObjectParameterivARB, return)
-
-    m_shader = glCreateShaderObjectARB(shaderType);
 
     QFile file(fileName);
 
@@ -82,6 +78,11 @@ GLShader::GLShader(const QString& fileName, GLenum shaderType)
         const char *p = bytes.data();
         qCritical("Open Shader File...");
         file.close();
+
+        GLSHADERS_ASSERT_OPENGL("GLShader::GLShader",
+            glCreateShaderObjectARB && glShaderSourceARB && glCompileShaderARB && glGetObjectParameterivARB, return)
+
+        m_shader = glCreateShaderObjectARB(shaderType);
         glShaderSourceARB(m_shader, 1, &p, &size);
         glCompileShaderARB(m_shader);
         int status;

@@ -28,10 +28,10 @@ bool CInterval::Intersect(CInterval *op)
   if (b <= op->a) return false;
   if (op->b <= a) return false;
 
-  // máximo izquierdo
+  // maximo izquierdo
   op->a = (a > op->a) ? a : op->a;
 
-  // mínimo derecho
+  // minimo derecho
   op->b = (b > op->b) ? op->b : b;
   return true;
 }
@@ -41,10 +41,10 @@ bool CInterval::Intersect(float &ra, float &rb)
   if (b <= ra) return false;
   if (rb <= a) return false;
 
-  // máximo izquierdo
+  // maximo izquierdo
   if (a>ra) ra = a;
 
-  // mínimo derecho
+  // minimo derecho
   if (b<rb) rb = b;
   return true;
 }

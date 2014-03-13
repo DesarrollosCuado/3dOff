@@ -106,10 +106,28 @@ CVector3Df& CVector3Df::operator*=(float s)
   return *this;
 }
 
+CVector3Df& CVector3Df::operator/=(float s)
+{
+  v[0] /= s;
+  v[1] /= s;
+  v[2] /= s;
+  return *this;
+}
+
 
 CVector3Df CVector3Df::operator *(float scalar) const
 {
   return CVector3Df(v[0]*scalar, v[1]*scalar, v[2]*scalar);
+}
+
+CVector3Df CVector3Df::operator +(float scalar) const
+{
+  return CVector3Df(v[0]+scalar, v[1]+scalar, v[2]+scalar);
+}
+
+CVector3Df CVector3Df::operator /(float scalar) const
+{
+  return CVector3Df(v[0]/scalar, v[1]/scalar, v[2]/scalar);
 }
 
 void CVector3Df::Normalize()

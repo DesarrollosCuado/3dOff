@@ -8,7 +8,6 @@
 #include <qmessagebox.h>
 #include <qfile.h>
 #include <qfiledialog.h>
-#include "punto3d.h"
 #include "ui_dm3d.h"
 #include "managerlight.h"
 
@@ -23,13 +22,13 @@ public:
 	~DM3d();
 	void resizeEvent(QResizeEvent * e);
 	void keyPressEvent(QKeyEvent * e);
-        ManagerLight *ml;
+    ManagerLight *ml;
 
 private:
 	Ui::DM3dClass ui;
 
 private slots:
-void on_actionClamp_triggered();
+    void on_actionClamp_triggered();
     void on_actionRepeat_triggered();
     void on_actionLinear_triggered();
     void on_actionEsferico_triggered();
@@ -39,7 +38,7 @@ void on_actionClamp_triggered();
     void on_actionCargar_Textura_triggered();
     void on_actionNormal_counter_clockwise_triggered();
     void on_actionNormal_clockwise_triggered();
-        void on_actionFlikering_triggered();
+    void on_actionFlikering_triggered();
 	void on_actionInformacion_del_Objeto_triggered();
 	void on_actionPerspectiva_triggered();
 	void on_actionOrtogonal_triggered();
