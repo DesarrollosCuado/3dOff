@@ -11,8 +11,8 @@ void main()
     vec3 vertexPos = vec3(gl_ModelViewMatrix * gl_Vertex);
     V = -normalize(vertexPos);
     for(int i=0;i<5;++i){
-   		if(LuzAct[i]==1) 
-    		L[i] = normalize(vec3(gl_LightSource[i].position) - vertexPos);
+        if(LuzAct[i]==1)
+            L[i] = normalize(vec3(gl_LightSource[i].position) - vertexPos);
     }
     N = (gl_NormalMatrix * gl_Normal);
     gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
